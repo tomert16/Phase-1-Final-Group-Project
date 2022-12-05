@@ -64,5 +64,37 @@
         "lengthOfDay": "16 hours 16 minutes",
         "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg"
       }
+    ],
+    "vehicles" : [
+        {
+            "id" : 1,
+            "name" : "Rocket",
+            "speed" : 300,
+            "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkJ71SIZPwlGFecAip7T8m4Vky99PUS9fg6g&usqp=CAU"
+        },
+        {
+            "id" : 2,
+            "name" : "Car",
+            "speed" : 100,
+            "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoX2OLrto2PUbr4HGxzn8rd4yx0k55k4e5PA&usqp=CAU"
+        },
+        {
+            "id" : 3,
+            "name" : "Bicycle",
+            "speed" : 20,
+            "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2O7a6olPJKW0McxBV5bpZqTlrT9aPzRpj1Q&usqp=CAU"
+        },
+        {
+            "id" : 4,
+            "name" : "Walk",
+            "speed": 5,
+            "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEB1_M8PUwijPmP9oZgIBAIGzSC-_UBx9-qA&usqp=CAU"
+        },
+        {
+            "id" : 5,
+            "name" : "Speed of light",
+            "speed" : 1070000000,
+            "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPC76PcOiy2mMFZUpWQmi_MhgnxxzkxjH6Q&usqp=CAU"
+        }
     ]
   }
