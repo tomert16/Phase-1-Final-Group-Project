@@ -37,3 +37,31 @@ header {
 .main-planet-detail-image{
     height: 350px;
 }
+#first-main-planet{
+    margin-right: 40pc;
+}
+#second-main-planet{
+    margin-left: 40pc;
+    position: relative;
+    top: -520px
+}
+#second-main-planet-info{
+    margin-left: 35pc;
+    position: relative;
+    top: -760px
+}
+
+#first-main-planet-info{
+    margin-right: 35pc;
+    position: relative;
+    top: -520px
+}
+#vehicle-picker{
+    position: relative;
+    bottom: 65pc;
+}
+#trip-info{
+    position:relative;
+    bottom: 10pc;
+    
+}
