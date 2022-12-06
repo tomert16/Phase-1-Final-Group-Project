@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Sun",
       "distanceFromSun": 0,
-      "lengthOfYear": "The Sun has no concept of a year",
+      "lengthOfYear": "0 days",
       "lengthOfDay": "24.5 days",
       "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/The_Sun_in_white_light.jpg"
     },
