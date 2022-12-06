@@ -1,8 +1,3 @@
-
-
-
-
-
 //////////////////////////////////
 ///Global Variables
 /////////////////////////////////
@@ -101,8 +96,13 @@ function addPlanetToPlanetList(planet){
         updateDisplay(planet)
     })      
     planetDOMList.append(planetImageDomElement);
-};
-
+    planetImageDomElement.addEventListener("mouseover", () =>{
+        planetImageDomElement.style.opacity = 0.3;
+    })
+    planetImageDomElement.addEventListener("mouseout", () =>{
+        planetImageDomElement.style.opacity = 1;
+    });
+}
 
 
 //Getting all the elements that we will be updating with the infomation when we click a planet
@@ -186,6 +186,3 @@ function transporationModeChange() {
         console.log(vehicle)
     })
 }
-
-
-
