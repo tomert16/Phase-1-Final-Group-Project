@@ -40,6 +40,7 @@ header {
 
 
 
+
 .switch {
 	position: relative;
 	display: block;
@@ -144,3 +145,34 @@ header {
 	-moz-transition: All 0.3s ease;
 	-o-transition: All 0.3s ease;
 }
+=======
+#first-main-planet{
+    margin-right: 40pc;
+}
+#second-main-planet{
+    margin-left: 40pc;
+    position: relative;
+    top: -645px
+}
+#second-main-planet-info{
+    margin-left: 40pc;
+    position: relative;
+    top: -885px
+}
+
+#first-main-planet-info{
+    margin-right: 40pc;
+    position: relative;
+    top: -640px
+}
+#vehicle-picker{
+    position: relative;
+    bottom: 65pc;
+}
+#trip-info{
+    position:relative;
+    bottom: 10pc;
+    
+}
+
+
