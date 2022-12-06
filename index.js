@@ -13,7 +13,7 @@ let distanceUnit = null
 
 
 /////////////////////////////////////////////
-///Start Up Data Fetch and Setup
+///Start Up Data Fetch and Page Setup
 /////////////////////////////////////////////
 
 ///fetch all the planet data then calls the fucntion to add the planets to the top list
@@ -69,7 +69,7 @@ newVehicleForm.addEventListener('submit', (e) => {
     const newVehicle = {
         id: lastVehicleIDOnServer,
         name: document.getElementById('new-name').value,
-        speed: document.getElementById('new-speed').value,
+        speed: calculateSpeedOfNewVehicle(),
         image: document.getElementById('new-image').value 
     }
     //add the new vehecial object to the dropdown
@@ -100,34 +100,19 @@ function addPlanetToPlanetList(planet){
     planetImageDomElement.addEventListener("click", () =>{
         updateDisplay(planet)
     })      
-    planetDOMList.append(planetImageDomElement);
+    //adds a listener that will slightly grey the image if out mouse goes over it
     planetImageDomElement.addEventListener("mouseover", () =>{
         planetImageDomElement.style.opacity = 0.3;
     })
     planetImageDomElement.addEventListener("mouseout", () =>{
         planetImageDomElement.style.opacity = 1;
     });
+    //adds the planet to the DOM list 
+    planetDOMList.append(planetImageDomElement);
 }
 
-
-//Getting all the elements that we will be updating with the infomation when we click a planet
+//Gets the start or end planet selector drop down
 const startEndPlanetSelector = document.getElementById("start-end-planet-selector")
-
-const firstMainDisplay = document.getElementById("first-main-planet")
-const firstMainDisplayImage = document.querySelector("#first-main-planet .main-planet-detail-image")
-const firstMainDisplayText = document.querySelector("#first-main-planet .main-planet-name")
-const firstPlanetSunDistance = document.querySelector("#first-main-planet-info .distance-from-sun")
-const firstPlanetYearLength = document.querySelector("#first-main-planet-info .year-length")
-const firstPlanetDayLength = document.querySelector("#first-main-planet-info .day-length")
-
-
-const secondMainDisplay = document.getElementById("second-main-planet")
-const secondMainDisplayImage = document.querySelector("#second-main-planet .main-planet-detail-image")
-const secondMainDisplayText = document.querySelector("#second-main-planet .main-planet-name")
-const secondPlanetSunDistance = document.querySelector("#second-main-planet-info .distance-from-sun")
-const secondPlanetYearLength = document.querySelector("#second-main-planet-info .year-length")
-const secondPlanetDayLength = document.querySelector("#second-main-planet-info .day-length")
-
 //updates either the left or right planet divs with the selected planet depending on the 
 // start or end planet drop down selector
 function updateDisplay (planet){  
@@ -142,51 +127,13 @@ function updateDisplay (planet){
     else{alert("please pick a star and end location")}
 }
 
-
-//calculates the distance between the two planets that are selcted
-const tripInfoDistance = document.getElementById("trip-distance")
-function calculateDistanceBetweenTwoPlanets (planetOne, planetTwo){
-    const distanceBetweenPlanets = Math.abs(planetOne.distanceFromSun - planetTwo.distanceFromSun)
-    //checks which distance unit we should be displaying in
-    if(distanceUnit === "kilometers"){
-        tripInfoDistance.innerText = `Your trip is ${distanceBetweenPlanets.toLocaleString()} kms long`
-    }
-    else if(distanceUnit === "miles"){
-        tripInfoDistance.innerText = `Your trip is ${(distanceBetweenPlanets * 0.62137).toLocaleString()} kms long`
-    }
-    calculateTimeForTrip(distanceBetweenPlanets)
-}
-
-//calcualtes the time it will take given the vehicle selected and the distace between the planets
-const tripInfoTime = document.getElementById("trip-time")
-function calculateTimeForTrip (distance){
-    const tripInSeconds = (distance / mainVehicle.speed) * 3600
-    tripInfoTime.innerText = `Your trip will take ${secondsToString(tripInSeconds)}`
-}
-
-//adds a veheicle to the veheicle drop down menu
-const vehicleTypeDropDown = document.getElementById('dropdown-vehicle-picker')
-function addVehiclesToDropdown(vehicle){
-    const vehicleToAdd = document.createElement('option')
-    vehicleToAdd.setAttribute("value", vehicle.id)
-    vehicleToAdd.innerText = vehicle.name
-    vehicleTypeDropDown.append(vehicleToAdd)
-}
-
-//when you change veheicals on the dropdown it gets all the info of that veheical from the server 
-//then updates the main area with all of that veheicals info
-const tripVehicleName = document.getElementById("trip-vehicle-name")
-const tripVehicleImg = document.getElementById('trip-vehicle-img')
-function transporationModeChange() {    
-    fetch(`http://localhost:3000/vehicles/${vehicleTypeDropDown.value}`)
-    .then (resp => resp.json())
-    .then(vehicle => {
-        tripVehicleName.innerText = vehicle.name
-        tripVehicleImg.src = vehicle.image
-        mainVehicle = vehicle
-    })
-}
-
+//gets all the elements that we will be updating with the infomation from the start planet
+const firstMainDisplay = document.getElementById("first-main-planet")
+const firstMainDisplayImage = document.querySelector("#first-main-planet .main-planet-detail-image")
+const firstMainDisplayText = document.querySelector("#first-main-planet .main-planet-name")
+const firstPlanetSunDistance = document.querySelector("#first-main-planet-info .distance-from-sun")
+const firstPlanetYearLength = document.querySelector("#first-main-planet-info .year-length")
+const firstPlanetDayLength = document.querySelector("#first-main-planet-info .day-length")
 //updates the left main planet display
 function updateFirstMainDisplay(planet){    
     //updates the frist main planet global variable so other functions know which one is in the first area 
@@ -201,10 +148,16 @@ function updateFirstMainDisplay(planet){
         firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
     }
     firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-    firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
-    
+    firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
 }
 
+//gets all the elements that we will be updating with the infomation from the end planet
+const secondMainDisplay = document.getElementById("second-main-planet")
+const secondMainDisplayImage = document.querySelector("#second-main-planet .main-planet-detail-image")
+const secondMainDisplayText = document.querySelector("#second-main-planet .main-planet-name")
+const secondPlanetSunDistance = document.querySelector("#second-main-planet-info .distance-from-sun")
+const secondPlanetYearLength = document.querySelector("#second-main-planet-info .year-length")
+const secondPlanetDayLength = document.querySelector("#second-main-planet-info .day-length")
 //updates the right main planet display
 function updateSecondMainDisplay(planet){   
     //updates the second main planet global variable so other functions know which one is in the second area 
@@ -222,14 +175,65 @@ function updateSecondMainDisplay(planet){
     secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
 }
 
+//calculates the distance between the two planets that are selcted
+const tripInfoDistance = document.getElementById("trip-distance")
+function calculateDistanceBetweenTwoPlanets (planetOne, planetTwo){
+    const distanceBetweenPlanets = Math.abs(planetOne.distanceFromSun - planetTwo.distanceFromSun)
+    //checks which distance unit we should be displaying in
+    if(distanceUnit === "kilometers"){
+        tripInfoDistance.innerText = `Your trip is ${distanceBetweenPlanets.toLocaleString()} kms long`
+    }
+    else if(distanceUnit === "miles"){
+        tripInfoDistance.innerText = `Your trip is ${(distanceBetweenPlanets * 0.62137).toLocaleString()} miles long`
+    }
+    calculateTimeForTrip(distanceBetweenPlanets)
+}
+
+//calcualtes the time it will take given the vehicle selected and the distace between the planets
+const tripInfoTime = document.getElementById("trip-time")
+function calculateTimeForTrip (distance){
+    //converts the time the trip will take into seconds
+    const tripInSeconds = (distance / mainVehicle.speed) * 3600
+    //converts the seconds into a readable string and displays it 
+    tripInfoTime.innerText = `And will take ${secondsToString(tripInSeconds)}`
+}
+
+//adds a veheicle to the veheicle drop down menu
+const vehicleTypeDropDown = document.getElementById('dropdown-vehicle-picker')
+function addVehiclesToDropdown(vehicle){
+    const vehicleToAdd = document.createElement('option')
+    vehicleToAdd.setAttribute("value", vehicle.id)
+    vehicleToAdd.innerText = vehicle.name
+    vehicleTypeDropDown.append(vehicleToAdd)
+}
+
+//when you change veheicals on the dropdown it gets all the info of that veheical from the server 
+//then updates the main area with all of that veheicals info
+const tripVehicleName = document.getElementById("trip-vehicle-name")
+const tripVehicleImg = document.getElementById('trip-vehicle-img')
+function transporationModeChange() {
+    //checks to makesure we picked a vehicle from the dropdown and not the dummy value
+    if(vehicleTypeDropDown.value !== 'dummy-vehicle'){    
+        //gets the info of the chosen vehicle from the server
+        fetch(`http://localhost:3000/vehicles/${vehicleTypeDropDown.value}`)
+        .then (resp => resp.json())
+        .then(vehicle => {
+            tripVehicleName.innerText = vehicle.name
+            tripVehicleImg.src = vehicle.image
+            mainVehicle = vehicle
+        })
+    }
+}
+
 //called by the switch on the html and updates what unit we are using for distance
 const switchToggle = document.getElementById("toggle-switch")
 function toggleDistanceUnit(){
     //checks what side the slider is on and then updates the global variable with that info
     distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'miles' : 'kilometers'
-    //refresh the main displays 
+    //refresh the displays when we change the distance unit 
     updateFirstMainDisplay(firstMainPlanet)   
     updateSecondMainDisplay(secondMainPlanet)
+    calculateDistanceBetweenTwoPlanets(firstMainPlanet, secondMainPlanet)
 }
 
 //converts a given amount of seconds and returns a more readable time duration
@@ -238,6 +242,22 @@ function secondsToString(seconds){
     var numdays = Math.floor((seconds % 31536000) / 86400); 
     var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
     var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
-    var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
-    return numyears + " years " +  numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+    var numseconds = Math.floor((((seconds % 31536000) % 86400) % 3600) % 60);
+    return numyears.toLocaleString() + " years " +  numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+}
+
+//makes sure that the speed of the new vehicle is in KPH which is what is stored on the server
+const newVehicleDistanceUnit = document.getElementById('new-vehicle-distance-unit')
+function calculateSpeedOfNewVehicle (){
+    document.getElementById('new-speed').value    
+    if (newVehicleDistanceUnit.value === 'dummy-unit'){
+        alert('Please Pick A Unit of Speed')
+    }
+    else if (newVehicleDistanceUnit.value === 'kph'){
+        return document.getElementById('new-speed').value
+    }
+    else if (newVehicleDistanceUnit.value === 'mph'){
+        return (document.getElementById('new-speed').value * 1.60934)
+    }
+
 }
