@@ -6,6 +6,7 @@ let firstMainPlanet = null;
 let secondMainPlanet = null;
 let mainVehicle = null;
 let lastVehicleIDOnServer = 0
+let distanceUnit = null
 
 
 
@@ -35,6 +36,9 @@ fetch("http://localhost:3000/vehicles")
     //figues out the id of the last vehicle on the API. Used when making a new vehicle 
     lastVehicleIDOnServer = (vehicleArray[vehicleArray.length - 1].id)
 })
+
+//updates the distance unit at the start
+distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'miles' : 'kilometers'
 
 
 
@@ -127,24 +131,14 @@ const secondPlanetDayLength = document.querySelector("#second-main-planet-info .
 // start or end planet drop down selector
 function updateDisplay (planet){  
     if(startEndPlanetSelector.value === "start"){
-        //updates the frist main planet global variable so other functions know which one is in the first area 
-        firstMainPlanet = planet
-        firstMainDisplayImage.src = planet.image
-        firstMainDisplayText.innerText = planet.name
-        firstPlanetSunDistance.innerText = planet.distanceFromSun + " km from the Sun"
-        firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-        firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
+        //calls the function to update the left planet displays
+        updateFirstMainDisplay(planet)
     }
     else if(startEndPlanetSelector.value === "end"){
-        //updates the second main planet global variable so other functions know which one is in the second area 
-        secondMainPlanet = planet
-        secondMainDisplayImage.src = planet.image
-        secondMainDisplayText.innerText = planet.name
-        secondPlanetSunDistance.innerText = planet.distanceFromSun + " km from the Sun"
-        secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-        secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
+        //calls the funtion to update the right planet displays
+        updateSecondMainDisplay(planet)
     }
-    else{alert("please pick a star or end location")}
+    else{alert("please pick a star and end location")}
 }
 
 
@@ -163,7 +157,7 @@ function calculateTimeForTrip (distance){
     tripInfoTime.innerText = `Your trip will take ${tripInHours} hours`
 }
 
-//adds a veheicle to the vehecial drop down menu
+//adds a veheicle to the veheicle drop down menu
 const vehicleTypeDropDown = document.getElementById('dropdown-vehicle-picker')
 function addVehiclesToDropdown(vehicle){
     const vehicleToAdd = document.createElement('option')
@@ -183,6 +177,53 @@ function transporationModeChange() {
         tripVehicleName.innerText = vehicle.name
         tripVehicleImg.src = vehicle.image
         mainVehicle = vehicle
-        console.log(vehicle)
     })
 }
+
+//updates the left main planet display
+function updateFirstMainDisplay(planet){    
+    //updates the frist main planet global variable so other functions know which one is in the first area 
+    firstMainPlanet = planet
+    firstMainDisplayImage.src = planet.image
+    firstMainDisplayText.innerText = planet.name
+    //checkes what distance unit we should be displaying based on the toggle switch
+    if(distanceUnit === "kilometers"){
+        firstPlanetSunDistance.innerText = planet.distanceFromSun + " km from the Sun"
+    }
+    else if(distanceUnit === "miles"){
+        firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137) + " miles from the Sun"
+    }
+    firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
+    firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
+    
+}
+
+//updates the right main planet display
+function updateSecondMainDisplay(planet){   
+    //updates the second main planet global variable so other functions know which one is in the second area 
+    secondMainPlanet = planet
+    secondMainDisplayImage.src = planet.image
+    secondMainDisplayText.innerText = planet.name
+    //checkes what distance unit we should be displaying based on the toggle switch
+    if(distanceUnit === "kilometers"){
+        secondPlanetSunDistance.innerText = planet.distanceFromSun + " km from the Sun"
+    }
+    else if(distanceUnit === "miles"){
+        secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137) + " miles from the Sun"
+    }
+    secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
+    secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
+    
+    
+}
+
+//called by the switch on the html and updates what unit we are using for distance
+const switchToggle = document.getElementById("toggle-switch")
+function toggleDistanceUnit(){
+    //checks what side the slider is on and then updates the global variable with that info
+    distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'miles' : 'kilometers'
+    //refresh the main displays 
+    updateFirstMainDisplay(firstMainPlanet)   
+    updateSecondMainDisplay(secondMainPlanet)
+}
+
