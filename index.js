@@ -1,6 +1,9 @@
-//////////////////////////////////
+
+
+
+////////////////////////////////////////////
 ///Global Variables
-/////////////////////////////////
+///////////////////////////////////////////
 //these get used between functions and help to keep track of the selected objects
 let firstMainPlanet = null;
 let secondMainPlanet = null;
@@ -9,13 +12,9 @@ let lastVehicleIDOnServer = 0
 let distanceUnit = null
 
 
-
-
-
-///////////////////////////////
-///Start Up Data Fetch
-//////////////////////////////
-
+/////////////////////////////////////////////
+///Start Up Data Fetch and Setup
+/////////////////////////////////////////////
 
 ///fetch all the planet data then calls the fucntion to add the planets to the top list
 fetch("http://localhost:3000/planets")
@@ -23,7 +22,13 @@ fetch("http://localhost:3000/planets")
 .then(planetArray => {    
      planetArray.forEach((planet) => { 
        addPlanetToPlanetList(planet);
-    });    
+    });
+
+    //update the main display at launch with the Sun and Earth
+    firstMainPlanet = planetArray[0]
+    secondMainPlanet = planetArray[3]
+    updateFirstMainDisplay(firstMainPlanet)  
+    updateSecondMainDisplay(secondMainPlanet)  
 });
 
 //fetch all the vehicle data and then call the function to add it to the vehicle dropdown   
@@ -42,12 +47,9 @@ distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'mil
 
 
 
-
-///////////////////////////////////////
-///Add listerners to interactables
-//////////////////////////////////////
-
-//we need to add a catch for if there is no planet selected for either side 
+///////////////////////////////////////////
+///Add Listerners to Interactables
+//////////////////////////////////////////
 
 //will updated the main area with the distance between the planets and then the time for
 //the trip based on the vehicle selected
@@ -84,10 +86,9 @@ newVehicleForm.addEventListener('submit', (e) => {
 
 
 
-
-//////////////////////////////////
+//////////////////////////////////////////
 ///Functions
-/////////////////////////////////
+//////////////////////////////////////////
 
 //Adds a planet to the planet bar at the top of the screen
 const planetDOMList = document.getElementById('planet-list');
@@ -146,15 +147,21 @@ function updateDisplay (planet){
 const tripInfoDistance = document.getElementById("trip-distance")
 function calculateDistanceBetweenTwoPlanets (planetOne, planetTwo){
     const distanceBetweenPlanets = Math.abs(planetOne.distanceFromSun - planetTwo.distanceFromSun)
-    tripInfoDistance.innerText = `Your trip is ${distanceBetweenPlanets} kms long`
+    //checks which distance unit we should be displaying in
+    if(distanceUnit === "kilometers"){
+        tripInfoDistance.innerText = `Your trip is ${distanceBetweenPlanets.toLocaleString()} kms long`
+    }
+    else if(distanceUnit === "miles"){
+        tripInfoDistance.innerText = `Your trip is ${(distanceBetweenPlanets * 0.62137).toLocaleString()} kms long`
+    }
     calculateTimeForTrip(distanceBetweenPlanets)
 }
 
 //calcualtes the time it will take given the vehicle selected and the distace between the planets
 const tripInfoTime = document.getElementById("trip-time")
 function calculateTimeForTrip (distance){
-    const tripInHours = (distance / mainVehicle.speed)
-    tripInfoTime.innerText = `Your trip will take ${tripInHours} hours`
+    const tripInSeconds = (distance / mainVehicle.speed) * 3600
+    tripInfoTime.innerText = `Your trip will take ${secondsToString(tripInSeconds)}`
 }
 
 //adds a veheicle to the veheicle drop down menu
@@ -188,10 +195,10 @@ function updateFirstMainDisplay(planet){
     firstMainDisplayText.innerText = planet.name
     //checkes what distance unit we should be displaying based on the toggle switch
     if(distanceUnit === "kilometers"){
-        firstPlanetSunDistance.innerText = planet.distanceFromSun + " km from the Sun"
+        firstPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
     }
     else if(distanceUnit === "miles"){
-        firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137) + " miles from the Sun"
+        firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
     }
     firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
     firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
@@ -206,15 +213,13 @@ function updateSecondMainDisplay(planet){
     secondMainDisplayText.innerText = planet.name
     //checkes what distance unit we should be displaying based on the toggle switch
     if(distanceUnit === "kilometers"){
-        secondPlanetSunDistance.innerText = planet.distanceFromSun + " km from the Sun"
+        secondPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
     }
     else if(distanceUnit === "miles"){
-        secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137) + " miles from the Sun"
+        secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
     }
     secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-    secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay
-    
-    
+    secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
 }
 
 //called by the switch on the html and updates what unit we are using for distance
@@ -227,3 +232,12 @@ function toggleDistanceUnit(){
     updateSecondMainDisplay(secondMainPlanet)
 }
 
+//converts a given amount of seconds and returns a more readable time duration
+function secondsToString(seconds){
+    var numyears = Math.floor(seconds / 31536000);
+    var numdays = Math.floor((seconds % 31536000) / 86400); 
+    var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+    var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+    var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+    return numyears + " years " +  numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+}
