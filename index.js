@@ -55,7 +55,14 @@ distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'mil
 //the trip based on the vehicle selected
 const tripButton = document.getElementById('trip-btn')
 tripButton.addEventListener('click', () => {
-    calculateDistanceBetweenTwoPlanets (firstMainPlanet, secondMainPlanet)
+    //makes sure that a vehicle is picked form the drop down
+    if (vehicleTypeDropDown.value === "dummy-vehicle"){
+        alert("Please pick a vehicle")
+    }
+    else{
+        //calls the function that updates the center display
+        calculateDistanceBetweenTwoPlanets (firstMainPlanet, secondMainPlanet)
+    }
 })
 
 //adds a new veheicle to the API 
@@ -135,20 +142,33 @@ const firstPlanetSunDistance = document.querySelector("#first-main-planet-info .
 const firstPlanetYearLength = document.querySelector("#first-main-planet-info .year-length")
 const firstPlanetDayLength = document.querySelector("#first-main-planet-info .day-length")
 //updates the left main planet display
-function updateFirstMainDisplay(planet){    
-    //updates the frist main planet global variable so other functions know which one is in the first area 
-    firstMainPlanet = planet
-    firstMainDisplayImage.src = planet.image
-    firstMainDisplayText.innerText = planet.name
-    //checkes what distance unit we should be displaying based on the toggle switch
-    if(distanceUnit === "kilometers"){
-        firstPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+function updateFirstMainDisplay(planet){   
+    //stops teh user from picking the same planet twice
+    if(secondMainPlanet === planet){
+        alert('You cannot travel to the same planet')
     }
-    else if(distanceUnit === "miles"){
-        firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
-    }
-    firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-    firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
+    else{
+        //updates the frist main planet global variable so other functions know which one is in the first area 
+        firstMainPlanet = planet
+        firstMainDisplayImage.src = planet.image
+        firstMainDisplayText.innerText = planet.name       
+        //checks to see if we are displaying The Sun and if so we display special text 
+        if(planet.name === "Sun"){
+            firstPlanetSunDistance.innerText = "You cannot get any closer to the Sun"
+            firstPlanetYearLength.innerText = "It is complicated -- Look up Sun barycenter"
+        }
+        else{
+            //checkes what distance unit we should be displaying based on the toggle switch
+            if(distanceUnit === "kilometers"){
+                firstPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+            }
+            else if(distanceUnit === "miles"){
+                firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+            }
+            firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
+        }
+        firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay   
+    } 
 }
 
 //gets all the elements that we will be updating with the infomation from the end planet
@@ -160,19 +180,32 @@ const secondPlanetYearLength = document.querySelector("#second-main-planet-info 
 const secondPlanetDayLength = document.querySelector("#second-main-planet-info .day-length")
 //updates the right main planet display
 function updateSecondMainDisplay(planet){   
-    //updates the second main planet global variable so other functions know which one is in the second area 
-    secondMainPlanet = planet
-    secondMainDisplayImage.src = planet.image
-    secondMainDisplayText.innerText = planet.name
-    //checkes what distance unit we should be displaying based on the toggle switch
-    if(distanceUnit === "kilometers"){
-        secondPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+     //stops teh user from picking the same planet twice
+     if(firstMainPlanet === planet){
+        alert('You cannot travel to the same planet')
     }
-    else if(distanceUnit === "miles"){
-        secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+    else{
+        //updates the second main planet global variable so other functions know which one is in the second area 
+        secondMainPlanet = planet
+        secondMainDisplayImage.src = planet.image
+        secondMainDisplayText.innerText = planet.name    
+        //checks to see if we are displaying The Sun and if so we display special text 
+        if(planet.name === "Sun"){
+            secondPlanetSunDistance.innerText = "You cannot get any closer to the Sun"
+            secondPlanetYearLength.innerText = "It is complicated -- Look up Sun barycenter"
+        }
+        else{
+            //checkes what distance unit we should be displaying based on the toggle switch
+            if(distanceUnit === "kilometers"){
+                secondPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+            }
+            else if(distanceUnit === "miles"){
+                secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+            }
+            secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
+        }   
+        secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
     }
-    secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-    secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
 }
 
 //calculates the distance between the two planets that are selcted
@@ -192,10 +225,13 @@ function calculateDistanceBetweenTwoPlanets (planetOne, planetTwo){
 //calcualtes the time it will take given the vehicle selected and the distace between the planets
 const tripInfoTime = document.getElementById("trip-time")
 function calculateTimeForTrip (distance){
-    //converts the time the trip will take into seconds
-    const tripInSeconds = (distance / mainVehicle.speed) * 3600
-    //converts the seconds into a readable string and displays it 
-    tripInfoTime.innerText = `And will take ${secondsToString(tripInSeconds)}`
+    //checks to make sure we picked a vehicle before we do the calcualtions
+    if (mainVehicle !== null){
+        //converts the time the trip will take into seconds
+        const tripInSeconds = (distance / mainVehicle.speed) * 3600
+        //converts the seconds into a readable string and displays it 
+        tripInfoTime.innerText = `And will take ${secondsToString(tripInSeconds)}`
+    }
 }
 
 //adds a veheicle to the veheicle drop down menu
@@ -259,5 +295,4 @@ function calculateSpeedOfNewVehicle (){
     else if (newVehicleDistanceUnit.value === 'mph'){
         return (document.getElementById('new-speed').value * 1.60934)
     }
-
 }
