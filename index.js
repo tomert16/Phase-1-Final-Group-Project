@@ -1,5 +1,4 @@
 
-
 //////////////////////////////////
 ///Global Variables
 /////////////////////////////////
@@ -8,6 +7,7 @@ let firstMainPlanet = null;
 let secondMainPlanet = null;
 let mainVehicle = null;
 let lastVehicleIDOnServer = 0
+
 
 
 
