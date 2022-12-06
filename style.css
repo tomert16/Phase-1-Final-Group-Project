@@ -145,7 +145,7 @@ header {
 	-moz-transition: All 0.3s ease;
 	-o-transition: All 0.3s ease;
 }
-=======
+
 #first-main-planet{
     margin-right: 40pc;
 }
@@ -173,6 +173,11 @@ header {
     position:relative;
     bottom: 10pc;
     
+}
+
+#new-vehicle{
+    position: relative;
+        bottom: 55pc;
 }
 
 
