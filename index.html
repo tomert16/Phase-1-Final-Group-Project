@@ -28,7 +28,10 @@
   </div>
 
   <div id="trip-info">
+    <h2 id="trip-vehicle-name">trip vehicle name</h2>
+    <img id="trip-vehicle-img"/>
     <h3 id="trip-distance">distance between the planets</h1>
+    <h3 id="trip-time">how long the tip will take</h3>
     <button id="trip-btn" >Calculate Trip</button>
   </div>    
 
@@ -51,6 +54,9 @@
         <option value=“car”>Car</option>
         <option value=“rocket”>Rocket</option>
         <option value=“speed-of-light”>Speed of Light</option>
+
+    <select id ="dropdown-vehicle-picker" onchange="transporationModeChange()">
+        
     </select>
 </div>
 
@@ -61,7 +67,16 @@
 </div>
 
 
-  
+<form id="new-vehicle">
+    <h2>Add your own Vehicle</h2>
+    <label for="name">Name: </label>
+    <input type="text" name="name" id="new-name" />
+    <label for="speed">Speed: </label>
+    <input type="number" name="speed" id="new-speed" />
+    <label for="image">Image: </label>
+    <input type="text" name="image" id="new-image" />
+    <input type="submit" value="Create" />
+</form>
 
     
 
