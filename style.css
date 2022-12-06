@@ -43,18 +43,18 @@ header {
 #second-main-planet{
     margin-left: 40pc;
     position: relative;
-    top: -520px
+    top: -645px
 }
 #second-main-planet-info{
     margin-left: 40pc;
     position: relative;
-    top: -760px
+    top: -885px
 }
 
 #first-main-planet-info{
     margin-right: 40pc;
     position: relative;
-    top: -520px
+    top: -640px
 }
 #vehicle-picker{
     position: relative;
@@ -65,6 +65,4 @@ header {
     bottom: 10pc;
     
 }
-#planet-id-1:hover{
-    opacity: 0.3;
-}
+
