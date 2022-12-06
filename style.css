@@ -15,6 +15,10 @@ header {
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
 }
+#new-vehicle {
+    position: relative;
+    bottom: 50pc;
+}
 
 #planet-list {
     display: flex;
