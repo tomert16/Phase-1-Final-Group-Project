@@ -91,7 +91,7 @@ header {
 .switch-label:before {
 	content: attr(data-off);
 	right: 11px;
-	color: #aaaaaa;
+	color: #000000;
 	text-shadow: 0 1px rgba(255, 255, 255, 0.5);
 }
 .switch-label:after {
