@@ -73,7 +73,7 @@ header {
 	height: inherit;
 	font-size: 10px;
 	text-transform: uppercase;
-	background: #eceeef;
+	background: #faf8f8;
 	border-radius: inherit;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
 	box-sizing:content-box;
@@ -103,9 +103,10 @@ header {
 	opacity: 0;
 }
 .switch-input:checked ~ .switch-label {
-	background: #E1B42B;
+	background: #070707;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
+
 .switch-input:checked ~ .switch-label:before {
 	opacity: 0;
 }
@@ -155,18 +156,18 @@ header {
 #second-main-planet{
     margin-left: 40pc;
     position: relative;
-    top: -645px
+    top: -730px
 }
 #second-main-planet-info{
     margin-left: 40pc;
     position: relative;
-    top: -885px
+    top: -980px
 }
 
 #first-main-planet-info{
     margin-right: 40pc;
     position: relative;
-    top: -640px
+    top: -740px
 }
 #vehicle-picker{
     position: relative;
@@ -174,8 +175,28 @@ header {
 }
 #trip-info{
     position:relative;
-    bottom: 10pc;
+    bottom: 15pc;
     
 }
 
+#trip-vehicle-img{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    bottom: 10pc;
+}
 
+#trip-vehicle-name{
+    position: relative;
+    bottom: 10pc;
+}
+#vehicle-picker{
+    position: relative;
+    bottom: 70pc;
+}
+
+.switch{
+    position: relative;
+    top: 35px;
+    width: 7pc;
+}
