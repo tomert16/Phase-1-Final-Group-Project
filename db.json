@@ -2,6 +2,14 @@
   "planets": [
     {
       "id": 1,
+      "name": "Sun",
+      "distanceFromSun": 0,
+      "lengthOfYear": "The Sun has no concept of a year",
+      "lengthOfDay": "24.5 days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/The_Sun_in_white_light.jpg"
+    },
+    {
+      "id": 2,
       "name": "Mercury",
       "distanceFromSun": 57810000,
       "lengthOfYear": "88 days",
@@ -9,7 +17,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg"
     },
     {
-      "id": 2,
+      "id": 3,
       "name": "Venus",
       "distanceFromSun": 107480000,
       "lengthOfYear": "225 days",
@@ -17,7 +25,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Venus_2_Approach_Image.jpg"
     },
     {
-      "id": 3,
+      "id": 4,
       "name": "Earth",
       "distanceFromSun": 151750000,
       "lengthOfYear": "365 days",
@@ -25,7 +33,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/The_Blue_Marble_%28remastered%29.jpg"
     },
     {
-      "id": 4,
+      "id": 5,
       "name": "Mars",
       "distanceFromSun": 227900000,
       "lengthOfYear": "687 days",
@@ -33,7 +41,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Tharsis_and_Valles_Marineris_-_Mars_Orbiter_Mission_%2830055660701%29.png"
     },
     {
-      "id": 5,
+      "id": 6,
       "name": "Jupiter",
       "distanceFromSun": 778890000,
       "lengthOfYear": "12 years",
@@ -41,7 +49,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Jupiter_New_Horizons.jpg"
     },
     {
-      "id": 6,
+      "id": 7,
       "name": "Saturn",
       "distanceFromSun": 1500000000,
       "lengthOfYear": "29 years",
@@ -49,7 +57,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg"
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "Uranus",
       "distanceFromSun": 2940000000,
       "lengthOfYear": "84 years",
@@ -57,7 +65,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg"
     },
     {
-      "id": 8,
+      "id": 9,
       "name": "Neptune",
       "distanceFromSun": 4480000000,
       "lengthOfYear": "165 years",
