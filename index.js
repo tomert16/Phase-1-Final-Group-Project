@@ -79,16 +79,23 @@ newVehicleForm.addEventListener('submit', (e) => {
         speed: calculateSpeedOfNewVehicle(),
         image: document.getElementById('new-image').value 
     }
-    //add the new vehecial object to the dropdown
-    addVehiclesToDropdown(newVehicle)
-    //adds the new vehecial to the API
-    fetch("http://localhost:3000/vehicles", {
-        method: "POST",
-        headers:{"Content-Type": "application/json"},
-        body: JSON.stringify(newVehicle)        
-    })
-    //resets the form
-    e.target.reset() 
+    //checks to see if all boxes on the form are filled
+    if (newVehicle.name === "" || newVehicle.image === ""){
+        alert("Please fill all form boxes")
+    }
+    //if they are all filled
+    else{
+        //add the new vehecial object to the dropdown
+        addVehiclesToDropdown(newVehicle)
+        //adds the new vehecial to the API
+        fetch("http://localhost:3000/vehicles", {
+            method: "POST",
+            headers:{"Content-Type": "application/json"},
+            body: JSON.stringify(newVehicle)        
+        })
+        //resets the form
+        e.target.reset() 
+    }
 })
 
 
@@ -143,7 +150,7 @@ const firstPlanetYearLength = document.querySelector("#first-main-planet-info .y
 const firstPlanetDayLength = document.querySelector("#first-main-planet-info .day-length")
 //updates the left main planet display
 function updateFirstMainDisplay(planet){   
-    //stops teh user from picking the same planet twice
+    //stops the user from picking the same planet twice
     if(secondMainPlanet === planet){
         alert('You cannot travel to the same planet')
     }

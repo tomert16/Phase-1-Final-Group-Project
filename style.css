@@ -1,68 +1,39 @@
 body {
-	text-align: center;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-	width: 100%;
-	height: 100%;
-	color:rgb(250, 247, 247);
-	/* padding-bottom: -50px; */
-}
-
-html{
-	margin-top: 0%;
-	margin-bottom: 0%;
+    text-align: center;
+    color:rgb(255, 255, 255); 
+    background-color: rgb(0, 0, 0);    	
 }
 
 header {
-    padding: 0.5rem;
+    display: block;
+    margin: auto;
     width: 90%;
+    padding: 0.5rem;    
     color: rgb(255, 255, 255);
     background-color: rgb(0, 0, 0);
-	font-size: 30px;
-	font-family: Copperplate, Papyrus, fantasy;
-}
-
-#new-vehicle {
-    position: relative;
-    bottom: 50pc;
+    font-size: 30px;
+    font-family: Copperplate, Papyrus, fantasy;
 }
 
 #planet-list {
-    display: flex;
+    display: flex;    
     overflow-x: scroll;
-    margin: 1rem 0;
-    max-width: calc(100vw - 2rem);
+    margin: 1rem;    
   }
   
 #planet-list img {
     flex: 0 1 auto;
     height: 150px;
-    margin-right: 0.5rem;
+    margin:auto;
     cursor: pointer;
 }
 
-#planet-list img:last-child {
-    margin-right: 0;
-}
-
-.main-planet-detail-image{
-    height: 350px;
-}
-
-
-
-
 .switch {
-	position: relative;
+	position: relative;    
 	display: block;
-	vertical-align: top;
-	width: 100px;
+	width: 160px;
 	height: 30px;
-	padding: 3px;
-	margin: 0 10px 10px 0;
+	padding: 3px;	
 	background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
 	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
 	border-radius: 18px;
@@ -81,7 +52,8 @@ header {
 	position: relative;
 	display: block;
 	height: inherit;
-	font-size: 10px;
+	font-size: 12px;
+    letter-spacing: .2rem;
 	text-transform: uppercase;
 	background: #faf8f8;
 	border-radius: inherit;
@@ -89,7 +61,7 @@ header {
 	box-sizing:content-box;
 }
 .switch-label:before, .switch-label:after {
-	position: absolute;
+    position: absolute;
 	top: 50%;
 	margin-top: -.5em;
 	line-height: 1;
@@ -118,7 +90,7 @@ header {
 }
 
 .switch-input:checked ~ .switch-label:before {
-	opacity: 0;
+    opacity: 0;
 }
 .switch-input:checked ~ .switch-label:after {
 	opacity: 1;
@@ -130,7 +102,7 @@ header {
 	width: 28px;
 	height: 28px;
 	background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
-	background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+	background-image: -webkit-linear-gradient(top, #ffffff 40%, #f0f0f0);
 	border-radius: 100%;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
@@ -147,81 +119,65 @@ header {
 	border-radius: 6px;
 	box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
 }
+
 .switch-input:checked ~ .switch-handle {
-	left: 74px;
+	left: 135px;
 	box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
 }
- 
-/* Transition
-========================== */
+
 .switch-label, .switch-handle {
-	transition: All 0.3s ease;
+    transition: All 0.3s ease;
 	-webkit-transition: All 0.3s ease;
 	-moz-transition: All 0.3s ease;
 	-o-transition: All 0.3s ease;
 }
 
-
-
-#first-main-planet{
-    margin-right: 40pc;
+#main-display-settings{
+    display: flex;    
+      
+    justify-content: center;    
 }
+
+#start-end-planet-selector{
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#dropdown-vehicle-picker{
+    height: 40px;
+}
+
+#main-display{
+    display: flex;    
+    justify-content: center;    
+}
+
+#first-main-planet{ 
+    width: 35%;   
+    justify-self: left
+}
+
+#main-info{
+    width: 30%;
+    margin-right: 5px;
+    margin-right: 5px;
+    justify-self: center;    
+}
+
 #second-main-planet{
-    margin-left: 40pc;
-    position: relative;
-    top: -730px
-}
-#second-main-planet-info{
-    margin-left: 40pc;
-    position: relative;
-    top: -980px
+    width: 35%;
+    justify-self: right;
 }
 
-#first-main-planet-info{
-    margin-right: 40pc;
-    position: relative;
-    top: -740px
+.main-planet-detail-image{
+    width: 90%;
 }
-#vehicle-picker{
-    position: relative;
-    bottom: 65pc;
-}
-#trip-info{
-    position:relative;
-    bottom: 15pc;
-    
-}
-
-#trip-time{
-	inline-size: 275px;
-}
-#new-vehicle{
-    position: relative;
-        bottom: 60pc;
-}
-
 
 #trip-vehicle-img{
-    width: 100px;
-    height: 100px;
-    position: relative;
-    bottom: 10pc;
+    width: 50%;
 }
 
-
-#trip-vehicle-name{
-    position: relative;
-    bottom: 10pc;
+#new-vehicle{
+    margin-bottom: 25px;
 }
-#vehicle-picker{
-    position: relative;
-    bottom: 70pc;
-}
-
-.switch{
-    position: relative;
-    top: 35px;
-    width: 7pc;
-}
-
-/* *{ border: 1px solid red; } */
