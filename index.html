@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,66 +10,85 @@
 </head>
 <body>
 
-    <header>
+  <header>
     <h3>Space Travel Simulator</h3>
   </header>
 
   <div id="planet-list"></div>
 
-  <select id="start-end-planet-selector">    
-    <option value="start">Start Planet</option>
-    <option value="end">End Planet</option>
-  </select>
-  
-  <label class="switch" onchange="toggleDistanceUnit()">
-    <input class="switch-input" type="checkbox"/>
-    <span class="switch-label" id="toggle-switch" data-on="Miles" data-off="Kilometers" ></span> 
-    <span class="switch-handle"></span> 
-  </label>
-
-  <div id="first-main-planet">
-    <img class="main-planet-detail-image"/>
-    <h1 class="main-planet-name">Insert Planet Name Here</h1>
-  </div>
-
-  <div id="trip-info">
-    <h2 id="trip-vehicle-name">trip vehicle name</h2>
-    <img id="trip-vehicle-img"/>
-    <h3 id="trip-distance">distance between the planets</h1>
-    <h3 id="trip-time">how long the trip will take</h3>
-    <button id="trip-btn" >Calculate Trip</button>
-  </div>    
-
-  <div id="second-main-planet">
-    <img class="main-planet-detail-image"/>
-    <h1 class="main-planet-name">Insert Planet Name Here</h1>
-  </div>
-
-  <div id="first-main-planet-info">
-      <h2 class="distance-from-sun">distance from sun</h2>
-      <h2 class="year-length">length of a year</h2>
-      <h2 class="day-length">length of a day</h2>
-  </div>
-
-  <div id="vehicle-picker">
-      <h4>Pick Vehicle</h4>
+  <div id="main-display-settings">
+    <label class="switch" onchange="toggleDistanceUnit()">
+      <input class="switch-input" type="checkbox"/>
+      <span class="switch-label" id="toggle-switch" data-on="Miles" data-off="Kilometers" ></span> 
+      <span class="switch-handle"></span> 
+    </label>    
+    <select id="start-end-planet-selector">    
+      <option value="start">Start Planet</option>
+      <option value="end">End Planet</option>
+    </select>
+    <div id="vehicle-picker">
       <select id ="dropdown-vehicle-picker" onchange="transporationModeChange()">
         <option value="dummy-vehicle">-- Pick mode of Transport --</option>
       </select>
+    </div>
   </div>
 
-  <div id="second-main-planet-info">
-      <h2 class="distance-from-sun">distance from sun</h2>
-      <h2 class="year-length">length of a year</h2>
-      <h2 class="day-length">length of a day</h2>
-  </div>
+  <div id='main-display'>
+    <div id="first-main-planet" class="planet-cards">
+      <div class="container">
+        <div class="card">
+          <div class="planet">
+            <div class="circle"></div>
+            <img  class ="main-planet-detail-image"  alt="adidas">
+          </div>
+          <div id="first-main-planet-info" class="info">
+            <h1 class="main-planet-name">Insert Planet Name Here</h1>            
+            <div class="facts">
+              <h2 class="distance-from-sun">distance from sun</h2>
+              <h2 class="year-length">length of a year</h2>
+              <h2 class="day-length">length of a day</h2>
+            </div>                  
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <div id="main-info">
+      <div id="trip-info">
+        <h2 id="trip-vehicle-name">trip vehicle name</h2>
+        <img id="trip-vehicle-img"/>
+        <h3 id="trip-distance">distance between the planets</h1>
+        <h3 id="trip-time">how long the trip will take</h3>
+        <button id="trip-btn" >Calculate Trip</button>
+      </div>      
+    </div>    
+
+    <div id="second-main-planet">
+      <div class="container">
+        <div class="card">
+          <div class="planet">
+            <div class="circle"></div>
+            <img  class ="main-planet-detail-image" alt="adidas">
+          </div>
+          <div id="second-main-planet-info" class="info">
+            <h1 class="main-planet-name">Insert Planet Name Here</h1>
+            <div class="facts">
+              <h2 class="distance-from-sun">distance from sun</h2>
+              <h2 class="year-length">length of a year</h2>
+              <h2 class="day-length">length of a day</h2>
+            </div>                  
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>  
 
   <form id="new-vehicle">
       <h2>Add your own Vehicle</h2>
       <label for="name">Name: </label>
       <input type="text" name="name" id="new-name" />
       <label for="speed">Speed: </label>
-      <input type="number" name="speed" id="new-speed" />
+      <input type="number" step="0.01" min="0.01" name="speed" id="new-speed" />
       <select id="new-vehicle-distance-unit">
         <option value="dummy-unit">-- Pick A Speed Unit --</option>
         <option value="kph">Kilometers Per Hour</option>
@@ -79,7 +97,7 @@
       <label for="image">Image: </label>
       <input type="text" name="image" id="new-image" />
       <input type="submit" value="Create" />
-  </form>  
+  </form>   
     
 </body>
 </html>
