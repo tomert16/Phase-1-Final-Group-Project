@@ -2,14 +2,6 @@
   "planets": [
     {
       "id": 1,
-      "name": "Sun",
-      "distanceFromSun": 0,
-      "lengthOfYear": "0 days",
-      "lengthOfDay": "24.5 days",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/The_Sun_in_white_light.jpg"
-    },
-    {
-      "id": 2,
       "name": "Mercury",
       "distanceFromSun": 57810000,
       "lengthOfYear": "88 days",
@@ -17,15 +9,15 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg"
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Venus",
       "distanceFromSun": 107480000,
       "lengthOfYear": "225 days",
       "lengthOfDay": "116 days, 18 hours",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Venus_2_Approach_Image.jpg"
+      "image": "https://i.natgeofe.com/n/ac8d40c6-1862-467e-b174-e999c528475e/PIA00271_detail.jpg"
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Earth",
       "distanceFromSun": 151750000,
       "lengthOfYear": "365 days",
@@ -33,7 +25,7 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/The_Blue_Marble_%28remastered%29.jpg"
     },
     {
-      "id": 5,
+      "id": 4,
       "name": "Mars",
       "distanceFromSun": 227900000,
       "lengthOfYear": "687 days",
@@ -41,68 +33,76 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Tharsis_and_Valles_Marineris_-_Mars_Orbiter_Mission_%2830055660701%29.png"
     },
     {
-      "id": 6,
+      "id": 5,
       "name": "Jupiter",
       "distanceFromSun": 778890000,
       "lengthOfYear": "12 years",
-      "lengthOfDay": "9 hours 56 minutes",
+      "lengthOfDay": "9 hours, 56 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Jupiter_New_Horizons.jpg"
     },
     {
-      "id": 7,
+      "id": 6,
       "name": "Saturn",
       "distanceFromSun": 1500000000,
       "lengthOfYear": "29 years",
-      "lengthOfDay": "10 hours 42 minutes",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg"
+      "lengthOfDay": "10 hours, 42 minutes",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/19/Saturn_square_crop.jpg"
     },
     {
-      "id": 8,
+      "id": 7,
       "name": "Uranus",
       "distanceFromSun": 2940000000,
       "lengthOfYear": "84 years",
-      "lengthOfDay": "17 hours 14 minutes",
+      "lengthOfDay": "17 hours, 14 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg"
     },
     {
-      "id": 9,
+      "id": 8,
       "name": "Neptune",
       "distanceFromSun": 4480000000,
       "lengthOfYear": "165 years",
-      "lengthOfDay": "16 hours 16 minutes",
+      "lengthOfDay": "16 hours, 16 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Sun",
+      "distanceFromSun": 0,
+      "lengthOfYear": "0 days",
+      "lengthOfDay": "24.5 days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/The_Sun_in_white_light.jpg"
     }
   ],
   "vehicles": [
     {
       "id": 1,
       "name": "Walk",
-      "speed": 5,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEB1_M8PUwijPmP9oZgIBAIGzSC-_UBx9-qA&usqp=CAU"
+      "speed": 5.1,
+      "image": "assets/vehicle images/man-walking-silhouette-white-isolated-on-a-black-vector-8492491.jpg"
     },
     {
       "id": 2,
       "name": "Bicycle",
-      "speed": 20,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2O7a6olPJKW0McxBV5bpZqTlrT9aPzRpj1Q&usqp=CAU"
+      "speed": 21.72,
+      "image": "assets/vehicle images/bicycle-on-black-background-vector-22690801.jpg"
     },
     {
       "id": 3,
       "name": "Car",
-      "speed": 70,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoX2OLrto2PUbr4HGxzn8rd4yx0k55k4e5PA&usqp=CAU"
+      "speed": 85,
+      "image": "assets/vehicle images/car-icon-on-black-background-for-graphic-and-web-vector-22971800.jpg"
     },
     {
       "id": 4,
       "name": "Rocket",
-      "speed": 36500,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkJ71SIZPwlGFecAip7T8m4Vky99PUS9fg6g&usqp=CAU"
+      "speed": 40233,
+      "image": "assets/vehicle images/abstract-space-rocket-ship-icon-vector-illustration-62788939.jpg"
     },
     {
       "id": 5,
       "name": "Speed of light",
       "speed": 1070000000,
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmPC76PcOiy2mMFZUpWQmi_MhgnxxzkxjH6Q&usqp=CAU"
+      "image": "assets/vehicle images/abstract-space-warp-effect-on-black-background-vector-38126451.jpg"
     }
   ]
 }
