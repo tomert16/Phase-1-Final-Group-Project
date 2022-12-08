@@ -31,6 +31,7 @@ header {
 }
 
 .planet-name{
+    width: 100px;
     position: relative;
     font-size: 20pt;
     top: 90px;
