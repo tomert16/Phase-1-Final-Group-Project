@@ -1,9 +1,17 @@
 {
   "planets": [
     {
+      "id": 9,
+      "name": "Sun",
+      "distanceFromSun": 0,
+      "lengthOfYear": "0 days",
+      "lengthOfDay": "24.5 days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/The_Sun_in_white_light.jpg"
+    },
+    {
       "id": 1,
       "name": "Mercury",
-      "distanceFromSun": 57810000,
+      "distanceFromSun": 57909227,
       "lengthOfYear": "88 days",
       "lengthOfDay": "58.5 days",
       "image": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg"
@@ -11,7 +19,7 @@
     {
       "id": 2,
       "name": "Venus",
-      "distanceFromSun": 107480000,
+      "distanceFromSun": 108209475,
       "lengthOfYear": "225 days",
       "lengthOfDay": "116 days, 18 hours",
       "image": "https://i.natgeofe.com/n/ac8d40c6-1862-467e-b174-e999c528475e/PIA00271_detail.jpg"
@@ -19,7 +27,7 @@
     {
       "id": 3,
       "name": "Earth",
-      "distanceFromSun": 151750000,
+      "distanceFromSun": 149598262,
       "lengthOfYear": "365 days",
       "lengthOfDay": "24 hours",
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/cb/The_Blue_Marble_%28remastered%29.jpg"
@@ -27,7 +35,7 @@
     {
       "id": 4,
       "name": "Mars",
-      "distanceFromSun": 227900000,
+      "distanceFromSun": 227943824,
       "lengthOfYear": "687 days",
       "lengthOfDay": "24 hours, 37 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Tharsis_and_Valles_Marineris_-_Mars_Orbiter_Mission_%2830055660701%29.png"
@@ -35,7 +43,7 @@
     {
       "id": 5,
       "name": "Jupiter",
-      "distanceFromSun": 778890000,
+      "distanceFromSun": 778340821,
       "lengthOfYear": "12 years",
       "lengthOfDay": "9 hours, 56 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Jupiter_New_Horizons.jpg"
@@ -43,7 +51,7 @@
     {
       "id": 6,
       "name": "Saturn",
-      "distanceFromSun": 1500000000,
+      "distanceFromSun": 1426666422,
       "lengthOfYear": "29 years",
       "lengthOfDay": "10 hours, 42 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/1/19/Saturn_square_crop.jpg"
@@ -51,7 +59,7 @@
     {
       "id": 7,
       "name": "Uranus",
-      "distanceFromSun": 2940000000,
+      "distanceFromSun": 2870658186,
       "lengthOfYear": "84 years",
       "lengthOfDay": "17 hours, 14 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg"
@@ -59,18 +67,10 @@
     {
       "id": 8,
       "name": "Neptune",
-      "distanceFromSun": 4480000000,
+      "distanceFromSun": 4498396441,
       "lengthOfYear": "165 years",
       "lengthOfDay": "16 hours, 16 minutes",
       "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg"
-    },
-    {
-      "id": 9,
-      "name": "Sun",
-      "distanceFromSun": 0,
-      "lengthOfYear": "0 days",
-      "lengthOfDay": "24.5 days",
-      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/The_Sun_in_white_light.jpg"
     }
   ],
   "dwarfPlanets":[
@@ -144,7 +144,7 @@
     {
       "id": 5,
       "name": "Speed of light",
-      "speed": 1070000000,
+      "speed": 1079252849,
       "image": "assets/vehicle images/abstract-space-warp-effect-on-black-background-vector-38126451.jpg"
     }
   ]
