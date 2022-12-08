@@ -16,12 +16,12 @@ let distanceUnit = null
 ///Start Up Data Fetch and Page Setup
 /////////////////////////////////////////////
 
-///fetch all the planet data then calls the fucntion to add the planets to the top list
+//fetch all the planet data then calls the fucntion to add the planets to the top list
 fetch("http://localhost:3000/planets")
 .then (resp => resp.json())
 .then(planetArray => {    
      planetArray.forEach((planet) => { 
-       addPlanetToPlanetList(planet);
+       addBodyToBodiesList(planet);
     });
 
     //update the main display at launch with the Sun and Earth
@@ -106,23 +106,36 @@ newVehicleForm.addEventListener('submit', (e) => {
 
 //Adds a planet to the planet bar at the top of the screen
 const planetDOMList = document.getElementById('planet-list');
-function addPlanetToPlanetList(planet){    
+function addBodyToBodiesList(planet){ 
+    //creates the div that the image and name will sit in then makes the name and image   
+    const planetBarDiv = document.createElement('div')
     const planetImageDomElement = document.createElement("img");
-    //give each planet image object and ID incase we want to refrence it    
+    const planetImageName = document.createElement("div")    
+    //give each element a class or ID so we can refence it in the code or CSS 
+    planetBarDiv.setAttribute('class', 'planet-card')
     planetImageDomElement.setAttribute('id', `planet-id-${planet.id}`);   
-    planetImageDomElement.src = planet.image;        
+    planetImageName.setAttribute('class', 'planet-name')
+    //adds the image and the text to the element
+    planetImageDomElement.src = planet.image;
+    planetImageName.innerText = planet.name
+    //adds the evennt clicker      
     planetImageDomElement.addEventListener("click", () =>{
         updateDisplay(planet)
-    })      
-    //adds a listener that will slightly grey the image if out mouse goes over it
+    })
+    //adds a listener that will slightly grey the image and show the name if the mouse goes over it
     planetImageDomElement.addEventListener("mouseover", () =>{
         planetImageDomElement.style.opacity = 0.3;
+        planetImageName.style.opacity = 1;        
     })
     planetImageDomElement.addEventListener("mouseout", () =>{
         planetImageDomElement.style.opacity = 1;
+        planetImageName.style.opacity = 0; 
     });
-    //adds the planet to the DOM list 
-    planetDOMList.append(planetImageDomElement);
+    //adds the elements together then adds it to the planet list
+    planetBarDiv.append(planetImageName);
+    planetBarDiv.append(planetImageDomElement) 
+    planetDOMList.append(planetBarDiv);
+
 }
 
 //Gets the start or end planet selector drop down
@@ -301,5 +314,34 @@ function calculateSpeedOfNewVehicle (){
     }
     else if (newVehicleDistanceUnit.value === 'mph'){
         return (document.getElementById('new-speed').value * 1.60934)
+    }
+}
+
+
+//changes the planets bar between plaents and dwarf planets baes on the drowdown list
+const planetTypePicker = document.getElementById("body-type-selector")
+planetTypePicker.reset()
+function updatePlanetList(){
+    //removes all the children (the images) from the bodies list
+    while(planetDOMList.firstChild){
+        planetDOMList.removeChild(planetDOMList.firstChild)
+    }    
+    if(planetTypePicker.value === "planets"){
+        fetch("http://localhost:3000/planets")
+        .then (resp => resp.json())
+        .then(planetArray => {    
+            planetArray.forEach((planet) => { 
+            addBodyToBodiesList(planet);
+            });
+        })
+    }
+    else if(planetTypePicker.value === "dwarfPlanets"){
+        fetch(" http://localhost:3000/dwarfPlanets")
+        .then (resp => resp.json())
+        .then(dwarfPlanetsArray => {
+            dwarfPlanetsArray.forEach((dwarfPlanet) => {
+                addBodyToBodiesList(dwarfPlanet)
+            })
+        })
     }
 }

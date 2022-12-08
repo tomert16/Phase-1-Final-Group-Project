@@ -19,13 +19,24 @@ header {
     display: flex;    
     overflow-x: scroll;
     margin: 1rem;    
-  }
-  
-#planet-list img {
-    flex: 0 1 auto;
-    height: 150px;
+}
+
+.planet-card{        
     margin:auto;
+}
+  
+#planet-list img {    
+    height: 150px;    
     cursor: pointer;
+}
+
+.planet-name{
+    position: relative;
+    font-size: 20pt;
+    top: 90px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
 }
 
 .switch {
@@ -138,9 +149,15 @@ header {
     justify-content: center;    
 }
 
+
 #start-end-planet-selector{
     height: 40px;
     margin-left: 10px;
+    margin-right: 10px;
+}
+
+#body-type-selector{
+    height: 40px;
     margin-right: 10px;
 }
 

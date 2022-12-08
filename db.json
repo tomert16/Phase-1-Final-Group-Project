@@ -73,6 +73,49 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/6/63/Neptune_-_Voyager_2_%2829347980845%29_flatten_crop.jpg"
     }
   ],
+  "dwarfPlanets":[
+    {
+      "id": 1,
+      "name": "Ceres",
+      "distanceFromSun": 413690250,
+      "lengthOfYear": "4 years 6 months",
+      "lengthOfDay": "9 hours",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/76/Ceres_-_RC3_-_Haulani_Crater_%2822381131691%29_%28cropped%29.jpg"
+    },
+    {
+    "id": 2,
+    "name": "Pluto",
+    "distanceFromSun": 5906440628,
+    "lengthOfYear": "248 years",
+    "lengthOfDay": "6 days 10 hours",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluto_in_True_Color_-_High-Res.jpg/1024px-Pluto_in_True_Color_-_High-Res.jpg"
+    },    
+    {
+      "id": 3,
+      "name": "Haumea",
+      "distanceFromSun": 6432011461,
+      "lengthOfYear": "283 years",
+      "lengthOfDay": "4 hours",
+      "image": "https://nineplanets.org/wp-content/uploads/2019/11/dwarf-planet-haumea-1024x683.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Makemake",
+      "distanceFromSun": 6783345606,
+      "lengthOfYear": "248 years",
+      "lengthOfDay": "22.5 hours",
+      "image": "https://cdn.mos.cms.futurecdn.net/8QBGiy9BhmttKdGeAAZpn8-970-80.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Eris",
+      "distanceFromSun": 10180122852,
+      "lengthOfYear": "561 years",
+      "lengthOfDay": "26 hours",
+      "image": "https://theplanets.org/123/2021/10/Eris-Facts.png"
+    }
+    
+  ],
   "vehicles": [
     {
       "id": 1,
