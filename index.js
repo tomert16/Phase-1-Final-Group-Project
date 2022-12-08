@@ -1,9 +1,6 @@
-
-
-
-////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///Global Variables
-///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //these get used between functions and help to keep track of the selected objects
 let firstMainPlanet = null;
 let secondMainPlanet = null;
@@ -12,9 +9,9 @@ let lastVehicleIDOnServer = 0
 let distanceUnit = null
 
 
-/////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///Start Up Data Fetch and Page Setup
-/////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //fetch all the planet data then calls the fucntion to add the planets to the top list
 fetch("http://localhost:3000/planets")
@@ -47,9 +44,9 @@ distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'mil
 
 
 
-///////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///Add Listerners to Interactables
-//////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //will updated the main area with the distance between the planets and then the time for
 //the trip based on the vehicle selected
@@ -100,9 +97,14 @@ newVehicleForm.addEventListener('submit', (e) => {
 
 
 
-//////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///Functions
-//////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////
+///Planet Bar 
+/////////////////////////////////////
 
 //Adds a planet to the planet bar at the top of the screen
 const planetDOMList = document.getElementById('planet-list');
@@ -135,11 +137,33 @@ function addBodyToBodiesList(planet){
     planetBarDiv.append(planetImageName);
     planetBarDiv.append(planetImageDomElement) 
     planetDOMList.append(planetBarDiv);
-
 }
+
+
+/////////////////////////////////////
+///Distance Button 
+/////////////////////////////////////
+
+//called by the switch on the html and updates what unit we are using for distance
+const switchToggle = document.getElementById("toggle-switch")
+function toggleDistanceUnit(){
+    //checks what side the slider is on and then updates the global variable with that info
+    distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'miles' : 'kilometers'
+    //refresh the displays when we change the distance unit 
+    updateFirstMainDisplay(firstMainPlanet)   
+    updateSecondMainDisplay(secondMainPlanet)
+    calculateDistanceBetweenTwoPlanets(firstMainPlanet, secondMainPlanet)
+}
+
+
+/////////////////////////////////////
+///Start End Dropdown  
+/////////////////////////////////////
 
 //Gets the start or end planet selector drop down
 const startEndPlanetSelector = document.getElementById("start-end-planet-selector")
+//sets the drop down vto "end body" when the page loads
+startEndPlanetSelector.value = "end"
 //updates either the left or right planet divs with the selected planet depending on the 
 // start or end planet drop down selector
 function updateDisplay (planet){  
@@ -153,6 +177,78 @@ function updateDisplay (planet){
     }
     else{alert("please pick a star and end location")}
 }
+
+
+/////////////////////////////////////
+///Planet Type Dropdown
+/////////////////////////////////////
+
+//changes the planets bar between plaents and dwarf planets baes on the drowdown list
+const planetTypePicker = document.getElementById("body-type-selector")
+//resets the value to planets upon the page first loading
+planetTypePicker.value = "planets"
+function updatePlanetList(){
+    //removes all the children (the images) from the bodies list
+    while(planetDOMList.firstChild){
+        planetDOMList.removeChild(planetDOMList.firstChild)
+    }
+    //populates the planet bar with the approiate type of body depending on the drop down bar    
+    if(planetTypePicker.value === "planets"){
+        fetch("http://localhost:3000/planets")
+        .then (resp => resp.json())
+        .then(planetArray => {    
+            planetArray.forEach((planet) => { 
+            addBodyToBodiesList(planet);
+            });
+        })
+    }
+    else if(planetTypePicker.value === "dwarfPlanets"){
+        fetch(" http://localhost:3000/dwarfPlanets")
+        .then (resp => resp.json())
+        .then(dwarfPlanetsArray => {
+            dwarfPlanetsArray.forEach((dwarfPlanet) => {
+                addBodyToBodiesList(dwarfPlanet)
+            })
+        })
+    }
+}
+
+
+/////////////////////////////////////
+///Vehecle Dropdown  
+/////////////////////////////////////
+
+//when you change veheicals on the dropdown it gets all the info of that veheical from the server 
+//then updates the main area with all of that veheicals info
+const tripVehicleName = document.getElementById("trip-vehicle-name")
+const tripVehicleImg = document.getElementById('trip-vehicle-img')
+function transporationModeChange() {
+    //checks to makesure we picked a vehicle from the dropdown and not the dummy value
+    if(vehicleTypeDropDown.value !== 'dummy-vehicle'){    
+        //gets the info of the chosen vehicle from the server
+        fetch(`http://localhost:3000/vehicles/${vehicleTypeDropDown.value}`)
+        .then (resp => resp.json())
+        .then(vehicle => {
+            tripVehicleName.innerText = vehicle.name
+            tripVehicleImg.src = vehicle.image
+            mainVehicle = vehicle
+        })
+    }
+}
+
+//adds a veheicle to the veheicle drop down menu
+const vehicleTypeDropDown = document.getElementById('dropdown-vehicle-picker')
+function addVehiclesToDropdown(vehicle){
+    const vehicleToAdd = document.createElement('option')
+    vehicleToAdd.setAttribute("value", vehicle.id)
+    vehicleToAdd.innerText = vehicle.name
+    vehicleTypeDropDown.append(vehicleToAdd)
+}
+
+
+/////////////////////////////////////
+///Main Planet Display Update   
+/////////////////////////////////////
 
 //gets all the elements that we will be updating with the infomation from the start planet
 const firstMainDisplay = document.getElementById("first-main-planet")
@@ -228,6 +324,11 @@ function updateSecondMainDisplay(planet){
     }
 }
 
+
+/////////////////////////////////////
+///Middle Info Display Update   
+/////////////////////////////////////
+
 //calculates the distance between the two planets that are selcted
 const tripInfoDistance = document.getElementById("trip-distance")
 function calculateDistanceBetweenTwoPlanets (planetOne, planetTwo){
@@ -254,43 +355,10 @@ function calculateTimeForTrip (distance){
     }
 }
 
-//adds a veheicle to the veheicle drop down menu
-const vehicleTypeDropDown = document.getElementById('dropdown-vehicle-picker')
-function addVehiclesToDropdown(vehicle){
-    const vehicleToAdd = document.createElement('option')
-    vehicleToAdd.setAttribute("value", vehicle.id)
-    vehicleToAdd.innerText = vehicle.name
-    vehicleTypeDropDown.append(vehicleToAdd)
-}
 
-//when you change veheicals on the dropdown it gets all the info of that veheical from the server 
-//then updates the main area with all of that veheicals info
-const tripVehicleName = document.getElementById("trip-vehicle-name")
-const tripVehicleImg = document.getElementById('trip-vehicle-img')
-function transporationModeChange() {
-    //checks to makesure we picked a vehicle from the dropdown and not the dummy value
-    if(vehicleTypeDropDown.value !== 'dummy-vehicle'){    
-        //gets the info of the chosen vehicle from the server
-        fetch(`http://localhost:3000/vehicles/${vehicleTypeDropDown.value}`)
-        .then (resp => resp.json())
-        .then(vehicle => {
-            tripVehicleName.innerText = vehicle.name
-            tripVehicleImg.src = vehicle.image
-            mainVehicle = vehicle
-        })
-    }
-}
-
-//called by the switch on the html and updates what unit we are using for distance
-const switchToggle = document.getElementById("toggle-switch")
-function toggleDistanceUnit(){
-    //checks what side the slider is on and then updates the global variable with that info
-    distanceUnit = document.getElementsByClassName("switch-input")[0].checked ? 'miles' : 'kilometers'
-    //refresh the displays when we change the distance unit 
-    updateFirstMainDisplay(firstMainPlanet)   
-    updateSecondMainDisplay(secondMainPlanet)
-    calculateDistanceBetweenTwoPlanets(firstMainPlanet, secondMainPlanet)
-}
+/////////////////////////////////////
+///Helper Functions   
+/////////////////////////////////////
 
 //converts a given amount of seconds and returns a more readable time duration
 function secondsToString(seconds){
@@ -314,34 +382,5 @@ function calculateSpeedOfNewVehicle (){
     }
     else if (newVehicleDistanceUnit.value === 'mph'){
         return (document.getElementById('new-speed').value * 1.60934)
-    }
-}
-
-
-//changes the planets bar between plaents and dwarf planets baes on the drowdown list
-const planetTypePicker = document.getElementById("body-type-selector")
-planetTypePicker.reset()
-function updatePlanetList(){
-    //removes all the children (the images) from the bodies list
-    while(planetDOMList.firstChild){
-        planetDOMList.removeChild(planetDOMList.firstChild)
-    }    
-    if(planetTypePicker.value === "planets"){
-        fetch("http://localhost:3000/planets")
-        .then (resp => resp.json())
-        .then(planetArray => {    
-            planetArray.forEach((planet) => { 
-            addBodyToBodiesList(planet);
-            });
-        })
-    }
-    else if(planetTypePicker.value === "dwarfPlanets"){
-        fetch(" http://localhost:3000/dwarfPlanets")
-        .then (resp => resp.json())
-        .then(dwarfPlanetsArray => {
-            dwarfPlanetsArray.forEach((dwarfPlanet) => {
-                addBodyToBodiesList(dwarfPlanet)
-            })
-        })
     }
 }
