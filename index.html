@@ -23,8 +23,12 @@
       <span class="switch-handle"></span> 
     </label>    
     <select id="start-end-planet-selector">    
-      <option value="start">Start Planet</option>
-      <option value="end">End Planet</option>
+      <option value="start">Start Body</option>
+      <option value="end">End Body</option>
+    </select>
+    <select id="body-type-selector" onchange="updatePlanetList()">
+      <option value="planets">Planets</option>
+      <option value="dwarfPlanets">Dwarf Planets</option> 
     </select>
     <div id="vehicle-picker">
       <select id ="dropdown-vehicle-picker" onchange="transporationModeChange()">
