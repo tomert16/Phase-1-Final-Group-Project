@@ -1,12 +1,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///Global Variables
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //these get used between functions and help to keep track of the selected objects
 let firstMainPlanet = null;
 let secondMainPlanet = null;
 let mainVehicle = null;
 let lastVehicleIDOnServer = 0
 let distanceUnit = null
+let numberOfMoons
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,6 +190,7 @@ const planetTypePicker = document.getElementById("body-type-selector")
 //resets the value to planets upon the page first loading
 planetTypePicker.value = "planets"
 function updatePlanetList(){
+    numberOfMoons = 0
     //removes all the children (the images) from the bodies list
     while(planetDOMList.firstChild){
         planetDOMList.removeChild(planetDOMList.firstChild)
@@ -203,13 +206,34 @@ function updatePlanetList(){
         })
     }
     else if(planetTypePicker.value === "dwarfPlanets"){
-        fetch(" http://localhost:3000/dwarfPlanets")
+        fetch("http://localhost:3000/dwarfPlanets")
         .then (resp => resp.json())
         .then(dwarfPlanetsArray => {
             dwarfPlanetsArray.forEach((dwarfPlanet) => {
                 addBodyToBodiesList(dwarfPlanet)
             })
         })
+    }
+    else if(planetTypePicker.value === "moons"){
+        fetch("http://localhost:3000/moons")
+        .then(resp => resp.json())
+        .then(moonArray => {
+            moonArray.forEach((moon) => {
+                findMoonsToDisplay(moon)                
+            })
+            //if the planet does not have any moons, we let the user know
+            if(numberOfMoons < 1){
+                alert(firstMainPlanet.name + " does not have any moons")
+            }
+        })
+    }
+}
+
+//will find and then display all the moons of that body
+function findMoonsToDisplay (moon){
+    if (firstMainPlanet.name === moon.parent){
+        addBodyToBodiesList(moon)        
+        numberOfMoons++
     }
 }
 
@@ -258,33 +282,39 @@ const firstPlanetSunDistance = document.querySelector("#first-main-planet-info .
 const firstPlanetYearLength = document.querySelector("#first-main-planet-info .year-length")
 const firstPlanetDayLength = document.querySelector("#first-main-planet-info .day-length")
 //updates the left main planet display
-function updateFirstMainDisplay(planet){   
-    //stops the user from picking the same planet twice
-    if(secondMainPlanet === planet){
-        alert('You cannot travel to the same planet')
+function updateFirstMainDisplay(planet){
+    //stops the user from putting a moon on the left side display   
+    if (planet.type === "satellite"){
+        alert("You cannot start your trip on a moon")
     }
-    else{
-        //updates the frist main planet global variable so other functions know which one is in the first area 
-        firstMainPlanet = planet
-        firstMainDisplayImage.src = planet.image
-        firstMainDisplayText.innerText = planet.name       
-        //checks to see if we are displaying The Sun and if so we display special text 
-        if(planet.name === "Sun"){
-            firstPlanetSunDistance.innerText = "You cannot get any closer to the Sun"
-            firstPlanetYearLength.innerText = "It is complicated -- Look up Sun barycenter"
+    else{        
+        //stops the user from picking the same planet twice
+        if(secondMainPlanet === planet){
+            alert('You cannot travel to the same planet')
         }
         else{
-            //checkes what distance unit we should be displaying based on the toggle switch
-            if(distanceUnit === "kilometers"){
-                firstPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+            //updates the frist main planet global variable so other functions know which one is in the first area 
+            firstMainPlanet = planet
+            firstMainDisplayImage.src = planet.image
+            firstMainDisplayText.innerText = planet.name       
+            //checks to see if we are displaying The Sun and if so we display special text 
+            if(planet.name === "Sun"){
+                firstPlanetSunDistance.innerText = "You cannot get any closer to the Sun"
+                firstPlanetYearLength.innerText = "It is complicated -- Look up Sun barycenter"
             }
-            else if(distanceUnit === "miles"){
-                firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+            else{
+                //checkes what distance unit we should be displaying based on the toggle switch
+                if(distanceUnit === "kilometers"){
+                    firstPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+                }
+                else if(distanceUnit === "miles"){
+                    firstPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+                }
+                firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
             }
-            firstPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
-        }
-        firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay   
-    } 
+            firstPlanetDayLength.innerText = "A day is " + planet.lengthOfDay   
+        } 
+    }
 }
 
 //gets all the elements that we will be updating with the infomation from the end planet
@@ -313,14 +343,35 @@ function updateSecondMainDisplay(planet){
         else{
             //checkes what distance unit we should be displaying based on the toggle switch
             if(distanceUnit === "kilometers"){
-                secondPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+                //checks if we are displaying a moon or a planet
+                if(planet.type === "satellite"){
+                    secondPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from " + firstMainPlanet.name
+                }
+                else{
+                    secondPlanetSunDistance.innerText = planet.distanceFromSun.toLocaleString() + " km from the Sun"
+                }
             }
             else if(distanceUnit === "miles"){
-                secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+                if(planet.type === "satellite"){
+                    secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from " + firstMainPlanet.name
+                }
+                else{
+                    secondPlanetSunDistance.innerText = (planet.distanceFromSun * 0.62137).toLocaleString() + " miles from the Sun"
+                }
             }
-            secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
+            if(planet.type === "satellite"){
+                secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around " + firstMainPlanet.name
+            }
+            else{
+                secondPlanetYearLength.innerText = planet.lengthOfYear + " to go around the Sun"
+            }
         }   
-        secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
+        if(planet.type === "satellite"){
+            secondPlanetDayLength.innerText = ""
+        }
+        else{
+            secondPlanetDayLength.innerText = "A day is " + planet.lengthOfDay    
+        }
     }
 }
 
@@ -384,3 +435,4 @@ function calculateSpeedOfNewVehicle (){
         return (document.getElementById('new-speed').value * 1.60934)
     }
 }
+
