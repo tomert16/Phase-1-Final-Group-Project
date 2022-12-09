@@ -435,4 +435,3 @@ function calculateSpeedOfNewVehicle (){
         return (document.getElementById('new-speed').value * 1.60934)
     }
 }
-
