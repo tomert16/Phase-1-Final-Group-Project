@@ -179,6 +179,69 @@
       "distanceFromSun": 1882700,
       "lengthOfYear": "16.7 Days",
       "image": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Callisto_-_July_8_1979_%2838926064465%29.jpg"
+    },
+    {
+      "id":8,
+      "type": "satellite",
+      "name": "Mimas",
+      "parent": "Saturn",
+      "distanceFromSun": 185539,
+      "lengthOfYear": "22 hours",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Mimas_Cassini.jpg"
+    },
+    {
+      "id":9,
+      "type": "satellite",
+      "name": "Enceladus",
+      "parent": "Saturn",
+      "distanceFromSun": 237948,
+      "lengthOfYear": "33 hours",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/83/PIA17202_-_Approaching_Enceladus.jpg"
+    },
+    {
+      "id":10,
+      "type": "satellite",
+      "name": "Tethys",
+      "parent": "Saturn",
+      "distanceFromSun": 294619,
+      "lengthOfYear": "46 hours",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/b/bc/PIA18317-SaturnMoon-Tethys-Cassini-20150411.jpg"
+    },
+    {
+      "id":11,
+      "type": "satellite",
+      "name": "Dione",
+      "parent": "Saturn",
+      "distanceFromSun": 377396,
+      "lengthOfYear": "2.7 Days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Dione_in_natural_light_%28cropped%29.jpg"
+    },
+    {
+      "id":12,
+      "type": "satellite",
+      "name": "Rhea",
+      "parent": "Saturn",
+      "distanceFromSun": 527108,
+      "lengthOfYear": "4.5 Days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/8/87/PIA08148_%28Rhea-Splat%29.jpg"
+    },
+    {
+      "id":13,
+      "type": "satellite",
+      "name": "Titan",
+      "parent": "Saturn",
+      "distanceFromSun": 1221870,
+      "lengthOfYear": "16 Days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Titan_in_true_color_by_Kevin_M._Gill.jpg"
+    },
+    {
+      "id":14,
+      "type": "satellite",
+      "name": "Iapetus",
+      "parent": "Saturn",
+      "distanceFromSun": 3560820,
+      "lengthOfYear": "79 Days",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Iapetus_as_seen_by_the_Cassini_probe_-_20071008.jpg"
     }
 
   ],
